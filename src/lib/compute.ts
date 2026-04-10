@@ -1,4 +1,4 @@
-import { dimensionOrder, DIM_EXPLANATIONS, dimensionMeta } from '../data/dimensions';
+import { dimensionOrder, dimensionMeta } from '../data/dimensions';
 import type { Level } from '../data/dimensions';
 import { questions } from '../data/questions';
 import { TYPE_LIBRARY, NORMAL_TYPES } from '../data/types';
@@ -72,12 +72,12 @@ export function computeResult(answers: Record<string, number>, drunkTriggered: b
     const similarity = Math.max(0, Math.round((1 - distance / 30) * 100));
     const libType = TYPE_LIBRARY[type.code];
     return {
+      ...libType,
       code: type.code,
       pattern: type.pattern,
       distance,
       exact,
       similarity,
-      ...libType
     };
   }).sort((a, b) => {
     if (a.distance !== b.distance) return a.distance - b.distance;
